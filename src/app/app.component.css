@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+    .p-sidebar-left{
+        width: 100% !important;
+    }
+
+    .p-sidebar-right{
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1000px) {
+    .p-sidebar-left{
+        width: 50vw !important;
+    }
+
+    .p-sidebar-right{
+        width: 50vw !important;
+    }
+}
+
+.p-inputnumber, .p-input-number-horizontal, .p-input-number-input {
+    width: 100%;
+}

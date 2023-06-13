@@ -1,0 +1,63 @@
+<div class="container-fluid border rounded p-4">
+    <h4 class="text-success">CALCULAR RENTAS</h4>
+    <div class="row">
+        <div class="col-6">
+            <label for="">Precio propiedad</label>
+            <p-inputNumber
+                [size]="100"
+                inputStyleClass="w-100"
+                styleClass="w-100"
+                placeholder="Ingresa valor de la propiedad"
+                mode="currency"
+                currency="USD" 
+                locale="en-US"
+                [(ngModel)]="precioPropiedad"
+                (onInput)="propertyValueInput($event)"
+            ></p-inputNumber>
+        </div>
+        <div class="col-6">
+            <label>% Escrituración</label>
+            <p-dropdown 
+                styleClass="w-100" 
+                [options]="opcionesPorcentajeEscrituracion" 
+                [(ngModel)]="porcentajeEscrituracion"
+                (onChange)="escrituracionValueChange($event)"
+            >
+                <ng-template let-porcentaje pTemplate="item">
+                    {{ (porcentaje * 100).toFixed(1) }}%
+                </ng-template>
+                <ng-template let-porcentaje pTemplate="selectedItem">
+                    <div class="selected-item-template">
+                        {{ (porcentaje * 100).toFixed(1) }}%
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <label class="w-100">Escrituración</label>
+            <span>{{costoEscrituracion | currency}}</span>
+        </div>
+        <div class="col-6">
+            <label class="w-100">Costo total</label>
+            <span>{{costoPropiedad | currency}}</span>
+        </div>
+    </div>
+    <div class="row mt-2" *ngIf="rentals.length > 0">
+        <p-table [value]="rentals">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="p-1">Renta anual</th>
+                    <th class="p-1">Renta</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rental>
+                <tr>
+                    <td class="p-1">{{ (rental.rate * 100).toFixed(1) }}%</td>
+                    <td class="p-1">{{ rental.rental.toFixed(0) | currency }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
